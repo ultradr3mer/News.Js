@@ -6,7 +6,7 @@ import SideMenu from './components/layout/SideMenu';
 import NewsGrid from './components/layout/NewsGrid';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Layout } from 'antd';
-const { Content } = Layout;
+const { Content, Footer } = Layout;
 
 class App extends Component {
   render() {
@@ -23,6 +23,9 @@ class App extends Component {
                 </Content>
               </Layout>
             </Content>
+            <Footer style={{ textAlign: 'center' }}>
+              React-Bing-News | ReactJS interfase using Ant Design for Bing News
+            </Footer>
           </Fragment>
         </Router>
       </Layout>

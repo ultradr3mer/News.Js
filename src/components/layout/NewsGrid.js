@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Card, Space } from 'antd';
+import { Card, Space, Col, Row } from 'antd';
 
 
 function NewsGrid() {
 
   // Add your Bing Search V7 subscription key and endpoint to your environment variables.
-  let subscriptionKey = 'nein';//process.env['BING_SEARCH_V7_SUBSCRIPTION_KEY']
+  let subscriptionKey = process.env.REACT_APP_BING_SEARCH_V7_SUBSCRIPTION_KEY;
   let host = 'https://api.bing.microsoft.com';
   let endpoint = host + '/v7.0/news/search';
 
@@ -15,7 +15,7 @@ function NewsGrid() {
   let mkt = 'en-US'
 
   const url = "https://jsonplaceholder.typicode.com/users";
-  const [data, setData] = useState({ value: []});
+  const [data, setData] = useState({ value: [] });
 
   const fetchInfo = () => {
     // return client.newsOperations.search(search_term)
@@ -26,14 +26,14 @@ function NewsGrid() {
     //   console.log()
     //   console.log(body)
     // })
-        return fetch(endpoint + "?q=" + query + "&mkt=" + mkt , {
-          method: "GET",
-          headers: {
-            'Ocp-Apim-Subscription-Key': subscriptionKey,
-          }
-        })
-      .then((res) => 
-      res.json()
+    return fetch(endpoint + "?q=" + query + "&mkt=" + mkt, {
+      method: "GET",
+      headers: {
+        'Ocp-Apim-Subscription-Key': subscriptionKey,
+      }
+    })
+      .then((res) =>
+        res.json()
       )
       .then((d) => setData(d))
     // return fetch(url)
@@ -46,23 +46,19 @@ function NewsGrid() {
   }, []);
 
   return (
-    <div className="News">
-      <h1 style={{ color: "green" }}>using JavaScript inbuilt FETCH API</h1>
-      <center>
-      { data.value.map((dataObj, index) => {
+      <Row>
+        {data.value.map((dataObj, index) => {
           return (
+            <Col xs={24} md={12} xl={6}>
               <Card
                 title={dataObj.name}
-                extra={<a href="#">More</a>}
-                style={{
-                  width: 300,
-                }}>
-                <p>{dataObj.description}</p>
+                style={{margin: '8px 4px'}}>
+                <p className="news-text no-pad">{dataObj.description}</p>
               </Card>
+            </Col>
           );
         })}
-      </center>
-    </div>
+      </Row>
   );
 }
 
