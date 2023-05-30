@@ -17,11 +17,13 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.2",
     "react-scripts": "5.0.1",
+    "request": "^2.88.2",
     "wait-on": "^7.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "dev": "concurrently \"npm start\" \"wait-on http://192.168.0.85:3000 && electron .\"",
+    "devcp": "concurrently \"npm start\" \"wait-on http://192.168.200.135:3000 && electron .\"",
     "electron": "electron .",
     "start": "react-scripts start",
     "build": "react-scripts build",
