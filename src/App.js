@@ -16,7 +16,7 @@ const App = () => {
           <Content style={{ padding: '0 20px' }}>
             <Layout style={{ padding: '24px 0', background: '#fff' }}>
               <Routes>
-                <Route path="/news" element={<NewsPage />} />
+                <Route path="/" element={<NewsPage />} />
                 <Route path="/category/:id" element={<NewsPage />} />
                 <Route path="/weather" element={<WeatherPage />} />
               </Routes>

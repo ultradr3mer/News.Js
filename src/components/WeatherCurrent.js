@@ -36,8 +36,8 @@ function WeatherCurrent() {
         <Card
           title={data.name}
           style={{ margin: '8px 4px' }}>
-          <Space>
-              <img alt="data.weather[0].main" height={108} src={"http://openweathermap.org/img/w/" + data.weather[0].icon + ".png"} />
+          <Space size={[16, 0]}>
+              <img alt="data.weather[0].main" height={108} src={"/weather-icons/" + data.weather[0].icon + ".svg"} />
             <Space size={[0, 0]} direction="vertical">
               <h1>{data.weather[0].main}</h1>
               <p>{data.weather[0].description}</p>
