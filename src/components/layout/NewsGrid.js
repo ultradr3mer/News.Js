@@ -15,22 +15,24 @@ function NewsGrid() {
   // Market you'd like to search in.
   let mkt = 'en-US'
 
-  const url = "https://jsonplaceholder.typicode.com/users";
   const [data, setData] = useState({ value: [] });
 
-  const fetchInfo = () => {
-    return fetch(endpoint + "?q=" + query + "&mkt=" + mkt, {
+  const fetchInfo = async () => {
+    const resp = await fetch(endpoint + "?q=" + query + "&mkt=" + mkt, {
       method: "GET",
       headers: {
         'Ocp-Apim-Subscription-Key': subscriptionKey,
       }
-    }).then((res) => res.json())
-      .then((d) => setData(d))
+    })
+    
+    const data = await resp.json();
+
+    setData(data);
   }
 
   useEffect(() => {
     fetchInfo();
-  }, []);
+  }, [params.id]);
 
   return (
       <Row>
