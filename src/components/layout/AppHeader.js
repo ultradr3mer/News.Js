@@ -18,12 +18,9 @@ const AppHeader = () => {
         theme="dark"
         mode="horizontal"
         defaultSelectedKeys={['home']}
-        style={{lineHeight: '64px'}}
-
-      >
-        <Menu.Item key="home"><Link to="/">Home</Link></Menu.Item>
-        <Menu.Item key="about"><Link to="/about/">About</Link></Menu.Item>
-        <Menu.Item key="contact"><Link to="/contact/">Contact</Link></Menu.Item>
+        style={{lineHeight: '64px'}}>
+        <Menu.Item key="news"><Link to="/news">News</Link></Menu.Item>
+        <Menu.Item key="weather"><Link to="/weather">Weather</Link></Menu.Item>
       </Menu>
     </Header>
   );
