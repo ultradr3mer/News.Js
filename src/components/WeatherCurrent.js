@@ -28,7 +28,7 @@ function WeatherCurrent() {
       setData(data);
     }  
     fetchInfo();
-  }, [location.search]);
+  }, [location.search, apiKey, endpoint]);
 
   return (
     <Fragment>

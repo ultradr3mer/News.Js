@@ -33,7 +33,7 @@ function NewsGrid() {
       setData(data);
     }
     fetchInfo();
-  }, [location]);
+  }, [location,endpoint, mkt, params.id, subscriptionKey]);
 
   return (
     <Row>
