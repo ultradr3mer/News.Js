@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { Card, Space, Col, Row } from 'antd';
+import { Card, Space, } from 'antd';
 import { useLocation } from "react-router-dom";
 
 function WeatherCurrent() {
@@ -11,7 +11,7 @@ function WeatherCurrent() {
 
   const [data, setData] = useState(undefined);
 
-  const fetchInfo = async () => {
+  useEffect(async () => {
     const queryParams = new URLSearchParams(location.search);
 
     if(!queryParams.get('lat'))
@@ -24,15 +24,11 @@ function WeatherCurrent() {
     const data = await resp.json();
 
     setData(data);
-  }
-
-  useEffect(() => {
-    fetchInfo();
   }, [location.search]);
 
   return (
     <Fragment>
-      {data != undefined &&
+      {data !== undefined &&
         <Card
           title={data.name}
           style={{ margin: '8px 4px' }}>
