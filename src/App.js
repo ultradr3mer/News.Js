@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Layout } from 'antd';
 import NewsPage from './components/NewsPage';
 import WeatherPage from './components/WeatherPage';
+import WeatherMap from './components/WeatherMap';
 const { Content, Footer } = Layout;
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
                 <Route path="/" element={<NewsPage />} />
                 <Route path="/category/:id" element={<NewsPage />} />
                 <Route path="/weather" element={<WeatherPage />} />
+                <Route path="/weathermap" element={<WeatherMap />} />
               </Routes>
             </Layout>
           </Content>
