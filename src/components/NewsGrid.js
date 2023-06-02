@@ -17,19 +17,22 @@ function NewsGrid() {
 
   const [data, setData] = useState({ value: [] });
 
-  useEffect(async () => {
-    let query = params.id;
-
-    const resp = await fetch(endpoint + "?q=" + query + "&mkt=" + mkt, {
-      method: "GET",
-      headers: {
-        'Ocp-Apim-Subscription-Key': subscriptionKey,
-      }
-    })
-
-    const data = await resp.json();
-
-    setData(data);
+  useEffect(() => {
+    async function fetchInfo() {
+      let query = params.id;
+  
+      const resp = await fetch(endpoint + "?q=" + query + "&mkt=" + mkt, {
+        method: "GET",
+        headers: {
+          'Ocp-Apim-Subscription-Key': subscriptionKey,
+        }
+      })
+  
+      const data = await resp.json();
+  
+      setData(data);
+    }
+    fetchInfo();
   }, [location]);
 
   return (

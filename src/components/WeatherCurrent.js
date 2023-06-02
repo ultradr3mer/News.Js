@@ -11,19 +11,23 @@ function WeatherCurrent() {
 
   const [data, setData] = useState(undefined);
 
-  useEffect(async () => {
-    const queryParams = new URLSearchParams(location.search);
 
-    if(!queryParams.get('lat'))
-    {
-      return;
-    }
-
-    const resp = await fetch(endpoint + `?lat=${queryParams.get('lat')}&lon=${queryParams.get('lon')}&appid=${apiKey}`)
-
-    const data = await resp.json();
-
-    setData(data);
+  useEffect(() => {
+    async function fetchInfo() {
+      const queryParams = new URLSearchParams(location.search);
+  
+      if(!queryParams.get('lat'))
+      {
+        return;
+      }
+  
+      const resp = await fetch(endpoint + `?lat=${queryParams.get('lat')}&lon=${queryParams.get('lon')}&appid=${apiKey}`)
+  
+      const data = await resp.json();
+  
+      setData(data);
+    }  
+    fetchInfo();
   }, [location.search]);
 
   return (
