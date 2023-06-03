@@ -11,13 +11,11 @@ const NewsPage = () => {
   return (
     <Fragment>
       <Sider width={220}
-        style={{ background: '#fff' }}
-      >
+        style={{ background: '#fff' }} >
         <Menu
           mode="inline"
           defaultSelectedKeys={['1']}
-          style={{ height: '100%' }}
-        >
+          style={{ height: '100%' }}>
           {categories.map((category) => {
             return (<Menu.Item key={category}><Link to={`/category/${category}`}>{category}</Link></Menu.Item>)
           })}

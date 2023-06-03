@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { Card, Space, Col, Row } from 'antd';
+import { Card, Space, Divider  } from 'antd';
 import { useLocation } from "react-router-dom";
+import WeatherHourly from "./WeatherHourly";
 
 function WeatherCurrent() {
   let location = useLocation();
@@ -14,12 +15,12 @@ function WeatherCurrent() {
   const fetchInfo = async () => {
     const queryParams = new URLSearchParams(location.search);
 
-    if(!queryParams.get('lat'))
+    if(!queryParams.get('city'))
     {
       return;
     }
 
-    const resp = await fetch(endpoint + `?lat=${queryParams.get('lat')}&lon=${queryParams.get('lon')}&appid=${apiKey}`)
+    const resp = await fetch(endpoint + `?q=${queryParams.get('city')},${queryParams.get('country')}&appid=${apiKey}&units=metric`)
 
     const data = await resp.json();
 
@@ -39,10 +40,15 @@ function WeatherCurrent() {
           <Space size={[16, 0]}>
               <img alt="data.weather[0].main" height={108} src={"/weather-icons/" + data.weather[0].icon + ".svg"} />
             <Space size={[0, 0]} direction="vertical">
-              <h1>{data.weather[0].main}</h1>
+              <h1>{data.weather[0].main} {data.main.temp}°C</h1>
+              <Divider style={{margin: "8px 0"}} />
               <p>{data.weather[0].description}</p>
             </Space>
           </Space>
+          <Divider style={{margin: "8px 0"}}  />
+          <div style={{overflowX: 'scroll'}}>
+          <WeatherHourly />
+          </div>
         </Card>
       }
     </Fragment>

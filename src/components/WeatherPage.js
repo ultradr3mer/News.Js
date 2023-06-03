@@ -7,9 +7,9 @@ import WeatherCurrent from './WeatherCurrent';
 const { Sider } = Layout;
 
 const WeatherPage = () => {
-  const locations = [{name: 'Hildesheim', lat: '52.1600', lon: '9.9428'}, 
-  {name: 'Viersen', lat: '51.2556', lon: '6.3950'}, 
-  {name: 'Munich', lat: '48.1388', lon: '11.5713'}];
+  const locations = [{name: 'Hildesheim', country: 'DE', lat: '52.1600', lon: '9.9428'}, 
+  {name: 'Viersen', country: 'DE', lat: '51.2556', lon: '6.3950'}, 
+  {name: 'Munich', country: 'DE', lat: '48.1388', lon: '11.5713'}];
   return (
     <Fragment>
       <Sider width={220}
@@ -19,7 +19,7 @@ const WeatherPage = () => {
           defaultSelectedKeys={['1']}
           style={{ height: '100%' }}>
           {locations.map((item) => {
-            return (<Menu.Item key={item.name}><Link to={`/weather?lat=${item.lat}&lon=${item.lon}`}>{item.name}</Link></Menu.Item>)
+            return (<Menu.Item key={item.name}><Link to={`/weather?city=${item.name}&country=${item.country}`}>{item.name}</Link></Menu.Item>)
           })}
         </Menu>
       </Sider>
