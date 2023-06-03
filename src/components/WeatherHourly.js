@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { Card, Space, Divider } from 'antd';
+import { Space } from 'antd';
 import { useLocation } from "react-router-dom";
 
 function WeatherHourly() {
@@ -14,20 +14,20 @@ function WeatherHourly() {
   useEffect(() => {
     const fetchInfo = async () => {
       const queryParams = new URLSearchParams(location.search);
-  
+
       if (!queryParams.get('city')) {
         return;
       }
-  
+
       const resp = await fetch(endpoint + `?q=${queryParams.get('city')},${queryParams.get('country')}&appid=${apiKey}&units=metric`)
-  
+
       const data = await resp.json();
-  
+
       setData(data);
     }
 
     fetchInfo();
-  }, [location.search]);
+  }, [location.search, apiKey, endpoint]);
 
   const formatTime = (d) => {
     return ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
@@ -35,17 +35,17 @@ function WeatherHourly() {
 
   return (
     <Fragment>
-      {data != undefined &&
-          <Space >
-            {data.list.map(item => {
-              var d = new Date(item.dt * 1000);
-              return <Space direction="vertical">
-                <img alt={item.weather[0].main} height={32} src={"/weather-icons/" + item.weather[0].icon + ".svg"} />
-                <p>{item.main.temp}°C</p>
-                <p>{formatTime(d)}</p>
-              </Space>
-            })}
-          </Space>
+      {data !== undefined &&
+        <Space >
+          {data.list.map(item => {
+            var d = new Date(item.dt * 1000);
+            return <Space direction="vertical">
+              <img alt={item.weather[0].main} height={32} src={"/weather-icons/" + item.weather[0].icon + ".svg"} />
+              <p>{item.main.temp}°C</p>
+              <p>{formatTime(d)}</p>
+            </Space>
+          })}
+        </Space>
       }
     </Fragment>
   );
