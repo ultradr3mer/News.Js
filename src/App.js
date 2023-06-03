@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import './App.css';
 import AppHeader from './components/layout/AppHeader';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";

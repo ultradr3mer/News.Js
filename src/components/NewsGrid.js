@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Space, Col, Row } from 'antd';
+import { Card, Col, Row } from 'antd';
 import { useParams, useLocation } from "react-router-dom";
 
 function NewsGrid() {
@@ -17,24 +17,23 @@ function NewsGrid() {
 
   const [data, setData] = useState({ value: [] });
 
-  const fetchInfo = async () => {
-    let query = params.id;
-
-    const resp = await fetch(endpoint + "?q=" + query + "&mkt=" + mkt, {
-      method: "GET",
-      headers: {
-        'Ocp-Apim-Subscription-Key': subscriptionKey,
-      }
-    })
-
-    const data = await resp.json();
-
-    setData(data);
-  }
-
   useEffect(() => {
+    async function fetchInfo() {
+      let query = params.id;
+  
+      const resp = await fetch(endpoint + "?q=" + query + "&mkt=" + mkt, {
+        method: "GET",
+        headers: {
+          'Ocp-Apim-Subscription-Key': subscriptionKey,
+        }
+      })
+  
+      const data = await resp.json();
+  
+      setData(data);
+    }
     fetchInfo();
-  }, [location]);
+  }, [location,endpoint, mkt, params.id, subscriptionKey]);
 
   return (
     <Row>

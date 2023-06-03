@@ -12,28 +12,28 @@ function WeatherCurrent() {
 
   const [data, setData] = useState(undefined);
 
-  const fetchInfo = async () => {
-    const queryParams = new URLSearchParams(location.search);
-
-    if(!queryParams.get('city'))
-    {
-      return;
+  useEffect(() => {
+    const fetchInfo = async () => {
+      const queryParams = new URLSearchParams(location.search);
+  
+      if(!queryParams.get('city'))
+      {
+        return;
+      }
+  
+      const resp = await fetch(endpoint + `?q=${queryParams.get('city')},${queryParams.get('country')}&appid=${apiKey}&units=metric`)
+  
+      const data = await resp.json();
+  
+      setData(data);
     }
 
-    const resp = await fetch(endpoint + `?q=${queryParams.get('city')},${queryParams.get('country')}&appid=${apiKey}&units=metric`)
-
-    const data = await resp.json();
-
-    setData(data);
-  }
-
-  useEffect(() => {
     fetchInfo();
-  }, [location.search]);
+  }, [location.search, apiKey, endpoint]);
 
   return (
     <Fragment>
-      {data != undefined &&
+      {data !== undefined &&
         <Card
           title={data.name}
           style={{ margin: '8px 4px' }}>
