@@ -11,21 +11,21 @@ function WeatherHourly() {
 
   const [data, setData] = useState(undefined);
 
-  const fetchInfo = async () => {
-    const queryParams = new URLSearchParams(location.search);
-
-    if (!queryParams.get('city')) {
-      return;
+  useEffect(() => {
+    const fetchInfo = async () => {
+      const queryParams = new URLSearchParams(location.search);
+  
+      if (!queryParams.get('city')) {
+        return;
+      }
+  
+      const resp = await fetch(endpoint + `?q=${queryParams.get('city')},${queryParams.get('country')}&appid=${apiKey}&units=metric`)
+  
+      const data = await resp.json();
+  
+      setData(data);
     }
 
-    const resp = await fetch(endpoint + `?q=${queryParams.get('city')},${queryParams.get('country')}&appid=${apiKey}&units=metric`)
-
-    const data = await resp.json();
-
-    setData(data);
-  }
-
-  useEffect(() => {
     fetchInfo();
   }, [location.search]);
 
